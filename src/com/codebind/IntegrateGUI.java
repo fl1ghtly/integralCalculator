@@ -7,16 +7,32 @@ import java.util.ArrayList;
 
 public class IntegrateGUI {
     private JPanel mainPanel;
-    private JButton test;
     private JTextField equationInput;
+    private JTextField leftBoundInput;
+    private JTextField rightBoundInput;
+    private JButton calculateButton;
 
     public IntegrateGUI()
     {
 
-        test.addActionListener(new ActionListener() {
+        calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Hello World");
+                String equation = equationInput.getText();
+                equationInput.setText("");
+
+                String leftBound = leftBoundInput.getText();
+                Double left = replaceBoundsOfIntegration(leftBound);
+                leftBoundInput.setText("");
+
+                String rightBound = rightBoundInput.getText();
+                Double right = replaceBoundsOfIntegration(rightBound);
+                rightBoundInput.setText("");
+
+                ArrayList<Token> tokens = EquationParser.tokenize(equation);
+                ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
+                Double v = Integrate.monteCarloIntegrate(rpn, 10000, left, right);
+                System.out.println(v);
             }
         });
     }
@@ -25,13 +41,6 @@ public class IntegrateGUI {
     {
         IntegrateGUI ig = new IntegrateGUI();
 
-        String equation = "sin(x)";
-        Double left = 0.0;
-        Double right = 1.0;
-        ArrayList<Token> tokens = EquationParser.tokenize(equation);
-        ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
-        Double v = Integrate.monteCarloIntegrate(rpn, 1000, left, right);
-        System.out.println(v);
 
         JFrame frame = new JFrame("Integrate");
         frame.setContentPane(ig.mainPanel);
