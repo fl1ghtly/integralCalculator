@@ -45,6 +45,41 @@ public class EquationParser
         return tkns;
     }
 
+    public ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
+    {
+        ArrayList<Token> changed = new ArrayList<>();
+        List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR);
+        List<TokenType> initial = List.of(TokenType.RPAR, TokenType.NUM);
+        ListIterator<Token> tokenListIterator = tokens.listIterator();
+        while (tokenListIterator.hasNext())
+        {
+            int i = tokenListIterator.nextIndex();
+            Token token = tokenListIterator.next();
+            if (i >= tokens.size() - 1)
+            {
+                changed.add(token);
+                break;
+            }
+
+            TokenType nextTokenType = tokens.get(i + 1).getType();
+            if (!HelperFunctions.in(token.getType(), initial))
+            {
+                changed.add(token);
+                continue;
+            }
+            if (HelperFunctions.in(nextTokenType, conditions))
+            {
+                changed.add(token);
+                changed.add(new Token("*"));
+            }
+            else
+            {
+                changed.add(token);
+            }
+        }
+        return changed;
+    }
+
     public static ArrayList<Token> convertEquation(ArrayList<Token> tokens)
     {
         Stack<Token> stack = new Stack<>();
