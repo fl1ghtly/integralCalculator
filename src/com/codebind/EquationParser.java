@@ -80,6 +80,29 @@ public class EquationParser
         return changed;
     }
 
+    public ArrayList<Token> changeUnaryOp(ArrayList<Token> tokens)
+    {
+        ArrayList<Token> changed = new ArrayList<>();
+        ListIterator<Token> tokenListIterator = tokens.listIterator();
+        while (tokenListIterator.hasNext())
+        {
+            int i = tokenListIterator.nextIndex();
+            Token token = tokenListIterator.next();
+            if (HelperFunctions.in(token.getTxt(), List.of("-", "!")))
+            {
+                if (i == 0)
+                {
+                    token.setType(TokenType.UNARYOP);
+                }
+                else if (HelperFunctions.in(tokens.get(i - 1).getTxt(), List.of("(", "*", "/")))
+                {
+                    token.setType(TokenType.UNARYOP);
+                }
+            }
+            changed.add(token);
+        }
+        return changed;
+    }
     public static ArrayList<Token> convertEquation(ArrayList<Token> tokens)
     {
         Stack<Token> stack = new Stack<>();
