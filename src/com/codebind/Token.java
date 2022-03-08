@@ -44,11 +44,11 @@ public class Token {
         {
             return TokenType.NUM;
         }
-        else if (this.txt.equals("("))
+        else if (s.equals("("))
         {
             return TokenType.LPAR;
         }
-        else if (this.txt.equals(")"))
+        else if (s.equals(")"))
         {
             return TokenType.RPAR;
         }

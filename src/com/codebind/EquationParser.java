@@ -45,7 +45,7 @@ public class EquationParser
         return tkns;
     }
 
-    public ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
+    public static ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
     {
         ArrayList<Token> changed = new ArrayList<>();
         List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR);
@@ -80,7 +80,7 @@ public class EquationParser
         return changed;
     }
 
-    public ArrayList<Token> changeUnaryOp(ArrayList<Token> tokens)
+    public static ArrayList<Token> changeUnaryOp(ArrayList<Token> tokens)
     {
         ArrayList<Token> changed = new ArrayList<>();
         ListIterator<Token> tokenListIterator = tokens.listIterator();
