@@ -30,7 +30,7 @@ public class Token {
         }
     }
 
-    private TokenType checkType(String s)
+    public TokenType checkType(String s)
     {
         if (this.isOperator(s))
         {
@@ -152,6 +152,11 @@ public class Token {
     public TokenType getType()
     {
         return this.type;
+    }
+
+    public void setType(TokenType t)
+    {
+        this.type = t;
     }
 
     public int getPrecedence()
