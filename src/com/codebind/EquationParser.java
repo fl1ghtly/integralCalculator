@@ -7,35 +7,41 @@ public class EquationParser
 {
     public static ArrayList<Token> tokenize(String s)
     {
-        List<String> breaks = Arrays.asList("\n", "(", ")", "+", "-", "^", "*", "/");
         String tkn = "";
         ArrayList<Token> tkns = new ArrayList<>();
+        Token emptyToken = new Token(null);
+        String c = s.substring(0, 1);
+        TokenType charType = emptyToken.checkType(c);
         for (char letter : s.toCharArray())
         {
             if (letter == ' ')
             {
                 continue;
             }
-
-            if (breaks.contains(Character.toString(letter)))
+            String cNew = Character.toString(letter);
+            TokenType newType = emptyToken.checkType(cNew);
+            if (newType != charType)
+            {
+                tkns.add(new Token(tkn));
+                tkn = cNew;
+                charType = newType;
+            }
+            else if (HelperFunctions.in(newType, List.of(TokenType.OP, TokenType.LPAR, TokenType.RPAR)))
             {
                 if (!tkn.equals(""))
                 {
                     tkns.add(new Token(tkn));
                 }
-                tkns.add(new Token(Character.toString(letter)));
-                tkn = "";
+                tkn = cNew;
+                charType = newType;
             }
             else
             {
-                tkn = tkn + letter;
+                tkn += cNew;
             }
         }
 
-        if (!tkn.equals(""))
-        {
-            tkns.add(new Token(tkn));
-        }
+        tkns.add(new Token(tkn));
         return tkns;
     }
 
