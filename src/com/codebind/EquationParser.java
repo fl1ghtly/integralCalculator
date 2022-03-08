@@ -212,6 +212,15 @@ public class EquationParser
         return v;
     }
 
+    private static Double calculate(Double x, String operator)
+    {
+        Double v = switch (operator) {
+            case "-" -> -x;
+            default -> null;
+        };
+        return v;
+    }
+
     public static Double evaluate(ArrayList<Token> eqn)
     {
         Stack<Token> stack = new Stack<>();
@@ -233,6 +242,13 @@ public class EquationParser
             {
                 double o1 = stack.pop().getValue();
                 Double v = evalFunc(tkn.getTxt(), o1);
+                stack.add(new Token(v.toString()));
+            }
+            else if (t == TokenType.UNARYOP)
+            {
+                Double num = stack.pop().getValue();
+                String op = tkn.getTxt();
+                Double v = calculate(num, op);
                 stack.add(new Token(v.toString()));
             }
         }
