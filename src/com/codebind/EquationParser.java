@@ -94,7 +94,7 @@ public class EquationParser
                 {
                     token.setType(TokenType.UNARYOP);
                 }
-                else if (HelperFunctions.in(tokens.get(i - 1).getTxt(), List.of("(", "*", "/")))
+                else if (HelperFunctions.in(tokens.get(i - 1).getTxt(), List.of("(", "*", "/" ,"-", "+")))
                 {
                     token.setType(TokenType.UNARYOP);
                 }
