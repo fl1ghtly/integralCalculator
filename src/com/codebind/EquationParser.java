@@ -48,8 +48,8 @@ public class EquationParser
     public static ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
     {
         ArrayList<Token> changed = new ArrayList<>();
-        List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR);
-        List<TokenType> initial = List.of(TokenType.RPAR, TokenType.NUM);
+        List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR, TokenType.SYMBOL);
+        List<TokenType> initial = List.of(TokenType.RPAR, TokenType.NUM, TokenType.SYMBOL);
         ListIterator<Token> tokenListIterator = tokens.listIterator();
         while (tokenListIterator.hasNext())
         {
@@ -111,7 +111,7 @@ public class EquationParser
         for (Token tkn : tokens)
         {
             TokenType t = tkn.getType();
-            if (t == TokenType.NUM)
+            if (t == TokenType.NUM || t == TokenType.SYMBOL)
             {
                 output.add(tkn);
             }
@@ -227,7 +227,7 @@ public class EquationParser
         for (Token tkn : eqn)
         {
             TokenType t = tkn.getType();
-            if (t == TokenType.NUM)
+            if (t == TokenType.NUM || t == TokenType.SYMBOL)
             {
                 stack.add(tkn);
             }
