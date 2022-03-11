@@ -201,14 +201,21 @@ public class EquationParser
 
     private static Double calculate(Double x, Double y, String operator)
     {
-        Double v = switch (operator) {
-            case "+" -> x + y;
-            case "-" -> x - y;
-            case "/" -> x / y;
-            case "*" -> x * y;
-            case "^" -> Math.pow(x, y);
-            default -> null;
-        };
+        Double v = null;
+        switch (operator)
+        {
+            case "+":
+                v = x + y;
+                break;
+            case "-":
+                v = x - y;
+            case "/":
+                v = x / y;
+            case "*":
+                v = x * y;
+            case "^":
+                v = Math.pow(x, y);
+        }
         return v;
     }
 
