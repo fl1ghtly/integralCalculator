@@ -1,6 +1,7 @@
 package com.codebind;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,6 +12,10 @@ public class IntegrateGUI {
     private JTextField leftBoundInput;
     private JTextField rightBoundInput;
     private JButton calculateButton;
+    private JLabel labelEquation;
+    private JLabel labelLeftBound;
+    private JLabel labelRightBound;
+    private JLabel labelOutput;
 
     public IntegrateGUI()
     {
@@ -32,7 +37,7 @@ public class IntegrateGUI {
                 ArrayList<Token> tokens = EquationParser.tokenize(equation);
                 ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
                 Double v = Integrate.monteCarloIntegrate(rpn, 10000, left, right);
-                System.out.println(v);
+                labelOutput.setText("Value: " + v.toString());
             }
         });
     }
