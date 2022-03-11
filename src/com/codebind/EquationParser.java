@@ -221,9 +221,11 @@ public class EquationParser
 
     private static Double calculate(Double x, String operator)
     {
-        Double v = switch (operator) {
-            case "-" -> -x;
-            default -> null;
+        Double v = null;
+        switch (operator)
+        {
+            case "-":
+                v = -x;
         };
         return v;
     }
