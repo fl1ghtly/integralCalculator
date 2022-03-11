@@ -130,7 +130,7 @@ public class Token {
 
     private boolean isNumber(String s)
     {
-        String[] specials = {"pi", "e", this.Variable};
+        String[] specials = {"pi", "e", "."};
         try
         {
             for (String special : specials)
