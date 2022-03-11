@@ -50,10 +50,12 @@ public class Integrate {
     }
 
     public static void main(String[] args) {
-        String equation = "3x+5";
+        String equation = "3x-5";
         Double left = 0.0;
         Double right = 3.0;
         ArrayList<Token> tokens = EquationParser.tokenize(equation);
+        tokens = EquationParser.changeUnaryOp(tokens);
+        tokens = EquationParser.addImplicitMultiplication(tokens);
         ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
         Double v = Integrate.monteCarloIntegrate(rpn, 10000, left, right);
     }
