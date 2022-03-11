@@ -7,7 +7,7 @@ public class EquationParser
 {
     private ArrayList<Token> tokens;
     private ArrayList<Token> rpn;
-    private final String eqn;
+    private String eqn;
 
     public EquationParser(String equation)
     {
@@ -279,6 +279,15 @@ public class EquationParser
     public String getEqn()
     {
         return this.eqn;
+    }
+
+    public void setEqn(String equation)
+    {
+        this.eqn = equation;
+        this.tokens = tokenize();
+        this.tokens = changeUnaryOp();
+        this.tokens = addImplicitMultiplication();
+        this.rpn = convertEquation();
     }
 
     public ArrayList<Token> getTokens()
