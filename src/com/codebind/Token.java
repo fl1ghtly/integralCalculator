@@ -30,21 +30,21 @@ public class Token {
         }
     }
 
-    public TokenType checkType(String s)
+    public static TokenType checkType(String s)
     {
-        if (this.isOperator(s))
+        if (isOperator(s))
         {
             return TokenType.OP;
         }
-        else if (this.isFunction(s))
+        else if (isFunction(s))
         {
             return TokenType.FUNC;
         }
-        else if (this.isNumber(s))
+        else if (isNumber(s))
         {
             return TokenType.NUM;
         }
-        else if (s.equals(this.Variable))
+        else if (s.equals(Variable))
         {
             return TokenType.SYMBOL;
         }
@@ -65,7 +65,7 @@ public class Token {
         HashMap<String, Double> values = new HashMap<>();
         values.put("pi", Math.PI);
         values.put("e", Math.E);
-        values.put(this.Variable, 0.0);
+        values.put(Variable, 0.0);
 
         if (this.txt.matches("[a-zA-Z]+"))
         {
@@ -101,7 +101,7 @@ public class Token {
         this.assoc = associativity.get(this.txt);
     }
 
-    private boolean isOperator(String s)
+    private static boolean isOperator(String s)
     {
         String[] operators = {"+", "-", "^", "*", "/"};
         for (String operator : operators)
@@ -114,7 +114,7 @@ public class Token {
         return false;
     }
 
-    private boolean isFunction(String s)
+    private static boolean isFunction(String s)
     {
         String[] funcs = {"sin", "cos", "tan", "arcsin", "arccos", "arctan",
                 "csc", "sec", "cot", "arccsc", "arcsec", "arccot",
@@ -132,7 +132,7 @@ public class Token {
         return false;
     }
 
-    private boolean isNumber(String s)
+    private static boolean isNumber(String s)
     {
         String[] specials = {"pi", "e", "."};
         try
