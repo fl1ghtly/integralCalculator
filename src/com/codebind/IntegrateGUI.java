@@ -34,9 +34,8 @@ public class IntegrateGUI {
                 Double right = replaceBoundsOfIntegration(rightBound);
                 rightBoundInput.setText("");
 
-                ArrayList<Token> tokens = EquationParser.tokenize(equation);
-                ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
-                Double v = Integrate.monteCarloIntegrate(rpn, 10000, left, right);
+                EquationParser parser = new EquationParser(equation);
+                Double v = Integrate.monteCarloIntegrate(parser, 10000, left, right);
                 labelOutput.setText("Value: " + v.toString());
             }
         });
@@ -58,8 +57,7 @@ public class IntegrateGUI {
     private Double replaceBoundsOfIntegration(String val)
     {
         // TODO add check to make sure it is a real number not a function
-        ArrayList<Token> tkns = EquationParser.tokenize(val);
-        ArrayList<Token> rpn = EquationParser.convertEquation(tkns);
-        return EquationParser.evaluate(rpn);
+        EquationParser parser = new EquationParser(val);
+        return parser.evaluate();
     }
 }

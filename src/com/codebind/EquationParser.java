@@ -5,14 +5,26 @@ import java.lang.reflect.*;
 
 public class EquationParser
 {
-    public static ArrayList<Token> tokenize(String s)
+    private ArrayList<Token> tokens;
+    private ArrayList<Token> rpn;
+    private String eqn;
+
+    public EquationParser(String equation)
+    {
+        this.eqn = equation;
+        this.tokens = tokenize();
+        this.tokens = changeUnaryOp();
+        this.tokens = addImplicitMultiplication();
+        this.rpn = convertEquation();
+    }
+
+    public ArrayList<Token> tokenize()
     {
         String tkn = "";
         ArrayList<Token> tkns = new ArrayList<>();
-        Token emptyToken = new Token(null);
-        String c = s.substring(0, 1);
+        String c = eqn.substring(0, 1);
         TokenType charType = Token.checkType(c);
-        for (char letter : s.toCharArray())
+        for (char letter : eqn.toCharArray())
         {
             if (letter == ' ')
             {
@@ -45,7 +57,7 @@ public class EquationParser
         return tkns;
     }
 
-    public static ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
+    public ArrayList<Token> addImplicitMultiplication()
     {
         ArrayList<Token> changed = new ArrayList<>();
         List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR, TokenType.SYMBOL);
@@ -80,7 +92,7 @@ public class EquationParser
         return changed;
     }
 
-    public static ArrayList<Token> changeUnaryOp(ArrayList<Token> tokens)
+    public ArrayList<Token> changeUnaryOp()
     {
         ArrayList<Token> changed = new ArrayList<>();
         ListIterator<Token> tokenListIterator = tokens.listIterator();
@@ -103,7 +115,7 @@ public class EquationParser
         }
         return changed;
     }
-    public static ArrayList<Token> convertEquation(ArrayList<Token> tokens)
+    public ArrayList<Token> convertEquation()
     {
         Stack<Token> stack = new Stack<>();
         ArrayList<Token> output = new ArrayList<>();
@@ -230,10 +242,10 @@ public class EquationParser
         return v;
     }
 
-    public static Double evaluate(ArrayList<Token> eqn)
+    public Double evaluate()
     {
         Stack<Token> stack = new Stack<>();
-        for (Token tkn : eqn)
+        for (Token tkn : rpn)
         {
             TokenType t = tkn.getType();
             if (t == TokenType.NUM || t == TokenType.SYMBOL)
@@ -262,5 +274,29 @@ public class EquationParser
             }
         }
         return stack.pop().getValue();
+    }
+
+    public String getEqn()
+    {
+        return this.eqn;
+    }
+
+    public void setEqn(String equation)
+    {
+        this.eqn = equation;
+        this.tokens = tokenize();
+        this.tokens = changeUnaryOp();
+        this.tokens = addImplicitMultiplication();
+        this.rpn = convertEquation();
+    }
+
+    public ArrayList<Token> getTokens()
+    {
+        return this.tokens;
+    }
+
+    public ArrayList<Token> getRPN()
+    {
+        return this.rpn;
     }
 }
