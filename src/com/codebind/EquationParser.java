@@ -11,7 +11,7 @@ public class EquationParser
         ArrayList<Token> tkns = new ArrayList<>();
         Token emptyToken = new Token(null);
         String c = s.substring(0, 1);
-        TokenType charType = emptyToken.checkType(c);
+        TokenType charType = Token.checkType(c);
         for (char letter : s.toCharArray())
         {
             if (letter == ' ')
@@ -19,7 +19,7 @@ public class EquationParser
                 continue;
             }
             String cNew = Character.toString(letter);
-            TokenType newType = emptyToken.checkType(cNew);
+            TokenType newType = Token.checkType(cNew);
             if (newType != charType)
             {
                 tkns.add(new Token(tkn));
