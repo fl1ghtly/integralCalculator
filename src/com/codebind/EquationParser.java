@@ -22,7 +22,6 @@ public class EquationParser
     {
         String tkn = "";
         ArrayList<Token> tkns = new ArrayList<>();
-        Token emptyToken = new Token(null);
         String c = eqn.substring(0, 1);
         TokenType charType = Token.checkType(c);
         for (char letter : eqn.toCharArray())
