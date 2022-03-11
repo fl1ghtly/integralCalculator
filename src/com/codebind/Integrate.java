@@ -3,10 +3,11 @@ import java.util.ArrayList;
 import java.util.ListIterator;
 
 public class Integrate {
-    public static double monteCarloIntegrate(ArrayList<Token> eqn, Integer n, Double a, Double b)
+    public static double monteCarloIntegrate(EquationParser ps, Integer n, Double a, Double b)
     {
         ArrayList<Double> x = randomUniform(a, b, n);
         ArrayList<Integer> indexes = new ArrayList<>();
+        ArrayList<Token> eqn = ps.getRPN();
         ListIterator<Token> enumerateEqn = eqn.listIterator();
         while (enumerateEqn.hasNext())
         {
@@ -24,7 +25,7 @@ public class Integrate {
             {
                 eqn.get(index).setValue(enumerateX.next());
             }
-            y.add(EquationParser.evaluate(eqn) * (b - a));
+            y.add(ps.evaluate() * (b - a));
         }
 
         return averageArray(y);

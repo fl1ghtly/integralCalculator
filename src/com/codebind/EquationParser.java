@@ -246,7 +246,7 @@ public class EquationParser
     public Double evaluate()
     {
         Stack<Token> stack = new Stack<>();
-        for (Token tkn : tokens)
+        for (Token tkn : rpn)
         {
             TokenType t = tkn.getType();
             if (t == TokenType.NUM || t == TokenType.SYMBOL)
