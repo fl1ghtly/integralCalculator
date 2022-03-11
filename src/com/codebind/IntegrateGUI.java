@@ -19,25 +19,21 @@ public class IntegrateGUI {
 
     public IntegrateGUI()
     {
+        calculateButton.addActionListener(e -> {
+            String equation = equationInput.getText();
+            equationInput.setText("");
 
-        calculateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String equation = equationInput.getText();
-                equationInput.setText("");
+            String leftBound = leftBoundInput.getText();
+            Double left = replaceBoundsOfIntegration(leftBound);
+            leftBoundInput.setText("");
 
-                String leftBound = leftBoundInput.getText();
-                Double left = replaceBoundsOfIntegration(leftBound);
-                leftBoundInput.setText("");
+            String rightBound = rightBoundInput.getText();
+            Double right = replaceBoundsOfIntegration(rightBound);
+            rightBoundInput.setText("");
 
-                String rightBound = rightBoundInput.getText();
-                Double right = replaceBoundsOfIntegration(rightBound);
-                rightBoundInput.setText("");
-
-                EquationParser parser = new EquationParser(equation);
-                Double v = Integrate.monteCarloIntegrate(parser, 10000, left, right);
-                labelOutput.setText("Value: " + v.toString());
-            }
+            EquationParser parser = new EquationParser(equation);
+            Double v = Integrate.monteCarloIntegrate(parser, 10000, left, right);
+            labelOutput.setText("Value: " + v);
         });
     }
 
