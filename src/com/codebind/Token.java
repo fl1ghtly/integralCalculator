@@ -11,37 +11,49 @@ public class Token {
 
     public Token(String s)
     {
-        this.txt = s;
-        this.precedence = 0;
-        this.assoc = 0;
-        this.setType();
+        if (s != null)
+        {
+            this.txt = s;
+            this.type = this.checkType(this.txt);
+            this.precedence = 0;
+            this.assoc = 0;
+
+            if (this.type == TokenType.OP)
+            {
+                this.setPrecedence();
+                this.setAssociation();
+            }
+            else if (this.type == TokenType.NUM)
+            {
+                this.setValue();
+            }
+        }
     }
 
-    private void setType()
+    public TokenType checkType(String s)
     {
-        if (this.isOperator())
+        if (this.isOperator(s))
         {
-            this.type = TokenType.OP;
-            this.setPrecedence();
-            this.setAssociation();
+            return TokenType.OP;
         }
-        else if (this.isFunction())
+        else if (this.isFunction(s))
         {
-            this.type = TokenType.FUNC;
+            return TokenType.FUNC;
         }
-        else if (this.isNumber())
+        else if (this.isNumber(s))
         {
-            this.type = TokenType.NUM;
-            this.setValue();
+            return TokenType.NUM;
         }
-        else if (this.txt.equals("("))
+        else if (s.equals("("))
         {
-            this.type = TokenType.LPAR;
+            return TokenType.LPAR;
         }
-        else if (this.txt.equals(")"))
+        else if (s.equals(")"))
         {
-            this.type = TokenType.RPAR;
+            return TokenType.RPAR;
         }
+
+        return TokenType.NONE;
     }
 
     private void setValue()
@@ -85,12 +97,12 @@ public class Token {
         this.assoc = associativity.get(this.txt);
     }
 
-    private boolean isOperator()
+    private boolean isOperator(String s)
     {
         String[] operators = {"+", "-", "^", "*", "/"};
         for (String operator : operators)
         {
-            if (this.txt.equals(operator))
+            if (s.equals(operator))
             {
                 return true;
             }
@@ -98,7 +110,7 @@ public class Token {
         return false;
     }
 
-    private boolean isFunction()
+    private boolean isFunction(String s)
     {
         String[] funcs = {"sin", "cos", "tan", "arcsin", "arccos", "arctan",
                 "csc", "sec", "cot", "arccsc", "arcsec", "arccot",
@@ -108,7 +120,7 @@ public class Token {
 
         for (String func : funcs)
         {
-            if (this.txt.equals(func))
+            if (s.equals(func))
             {
                 return true;
             }
@@ -116,19 +128,19 @@ public class Token {
         return false;
     }
 
-    private boolean isNumber()
+    private boolean isNumber(String s)
     {
         String[] specials = {"pi", "e", this.Variable};
         try
         {
             for (String special : specials)
             {
-                if (this.txt.equals(special))
+                if (s.equals(special))
                 {
                     return true;
                 }
             }
-            Float.parseFloat(this.txt);
+            Float.parseFloat(s);
             return true;
         }
         catch (Exception e)
@@ -140,6 +152,11 @@ public class Token {
     public TokenType getType()
     {
         return this.type;
+    }
+
+    public void setType(TokenType t)
+    {
+        this.type = t;
     }
 
     public int getPrecedence()

@@ -7,38 +7,102 @@ public class EquationParser
 {
     public static ArrayList<Token> tokenize(String s)
     {
-        List<String> breaks = Arrays.asList("\n", "(", ")", "+", "-", "^", "*", "/");
         String tkn = "";
         ArrayList<Token> tkns = new ArrayList<>();
+        Token emptyToken = new Token(null);
+        String c = s.substring(0, 1);
+        TokenType charType = emptyToken.checkType(c);
         for (char letter : s.toCharArray())
         {
             if (letter == ' ')
             {
                 continue;
             }
-
-            if (breaks.contains(Character.toString(letter)))
+            String cNew = Character.toString(letter);
+            TokenType newType = emptyToken.checkType(cNew);
+            if (newType != charType)
+            {
+                tkns.add(new Token(tkn));
+                tkn = cNew;
+                charType = newType;
+            }
+            else if (HelperFunctions.in(newType, List.of(TokenType.OP, TokenType.LPAR, TokenType.RPAR)))
             {
                 if (!tkn.equals(""))
                 {
                     tkns.add(new Token(tkn));
                 }
-                tkns.add(new Token(Character.toString(letter)));
-                tkn = "";
+                tkn = cNew;
+                charType = newType;
             }
             else
             {
-                tkn = tkn + letter;
+                tkn += cNew;
             }
         }
 
-        if (!tkn.equals(""))
-        {
-            tkns.add(new Token(tkn));
-        }
+        tkns.add(new Token(tkn));
         return tkns;
     }
 
+    public static ArrayList<Token> addImplicitMultiplication(ArrayList<Token> tokens)
+    {
+        ArrayList<Token> changed = new ArrayList<>();
+        List<TokenType> conditions = List.of(TokenType.FUNC, TokenType.NUM, TokenType.LPAR);
+        List<TokenType> initial = List.of(TokenType.RPAR, TokenType.NUM);
+        ListIterator<Token> tokenListIterator = tokens.listIterator();
+        while (tokenListIterator.hasNext())
+        {
+            int i = tokenListIterator.nextIndex();
+            Token token = tokenListIterator.next();
+            if (i >= tokens.size() - 1)
+            {
+                changed.add(token);
+                break;
+            }
+
+            TokenType nextTokenType = tokens.get(i + 1).getType();
+            if (!HelperFunctions.in(token.getType(), initial))
+            {
+                changed.add(token);
+                continue;
+            }
+            if (HelperFunctions.in(nextTokenType, conditions))
+            {
+                changed.add(token);
+                changed.add(new Token("*"));
+            }
+            else
+            {
+                changed.add(token);
+            }
+        }
+        return changed;
+    }
+
+    public static ArrayList<Token> changeUnaryOp(ArrayList<Token> tokens)
+    {
+        ArrayList<Token> changed = new ArrayList<>();
+        ListIterator<Token> tokenListIterator = tokens.listIterator();
+        while (tokenListIterator.hasNext())
+        {
+            int i = tokenListIterator.nextIndex();
+            Token token = tokenListIterator.next();
+            if (HelperFunctions.in(token.getTxt(), List.of("-", "!")))
+            {
+                if (i == 0)
+                {
+                    token.setType(TokenType.UNARYOP);
+                }
+                else if (HelperFunctions.in(tokens.get(i - 1).getTxt(), List.of("(", "*", "/")))
+                {
+                    token.setType(TokenType.UNARYOP);
+                }
+            }
+            changed.add(token);
+        }
+        return changed;
+    }
     public static ArrayList<Token> convertEquation(ArrayList<Token> tokens)
     {
         Stack<Token> stack = new Stack<>();
@@ -155,6 +219,15 @@ public class EquationParser
         return v;
     }
 
+    private static Double calculate(Double x, String operator)
+    {
+        Double v = switch (operator) {
+            case "-" -> -x;
+            default -> null;
+        };
+        return v;
+    }
+
     public static Double evaluate(ArrayList<Token> eqn)
     {
         Stack<Token> stack = new Stack<>();
@@ -176,6 +249,13 @@ public class EquationParser
             {
                 double o1 = stack.pop().getValue();
                 Double v = evalFunc(tkn.getTxt(), o1);
+                stack.add(new Token(v.toString()));
+            }
+            else if (t == TokenType.UNARYOP)
+            {
+                Double num = stack.pop().getValue();
+                String op = tkn.getTxt();
+                Double v = calculate(num, op);
                 stack.add(new Token(v.toString()));
             }
         }
