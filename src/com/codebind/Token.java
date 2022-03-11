@@ -44,6 +44,10 @@ public class Token {
         {
             return TokenType.NUM;
         }
+        else if (s.equals(this.Variable))
+        {
+            return TokenType.SYMBOL;
+        }
         else if (s.equals("("))
         {
             return TokenType.LPAR;
