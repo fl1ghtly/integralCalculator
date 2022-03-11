@@ -48,7 +48,7 @@ public class Integrate {
         }
         return randArr;
     }
-
+/*
     public static void main(String[] args) {
         String equation = "3x-5";
         Double left = 0.0;
@@ -58,5 +58,5 @@ public class Integrate {
         tokens = EquationParser.addImplicitMultiplication(tokens);
         ArrayList<Token> rpn = EquationParser.convertEquation(tokens);
         Double v = Integrate.monteCarloIntegrate(rpn, 10000, left, right);
-    }
+    }*/
 }
