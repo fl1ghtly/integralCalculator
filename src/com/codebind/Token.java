@@ -14,7 +14,7 @@ public class Token {
         if (s != null)
         {
             this.txt = s;
-            this.type = this.checkType(this.txt);
+            this.type = checkType(this.txt);
             this.precedence = 0;
             this.assoc = 0;
 
