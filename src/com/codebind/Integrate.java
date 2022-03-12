@@ -13,18 +13,10 @@ public class Integrate extends EquationParser{
         this.rightBound = b;
     }
 
-    public double monteCarloIntegrate(Integer n, Double a, Double b)
+    public double monteCarloIntegrate(Integer n)
     {
-        ArrayList<Double> x = randomUniform(a, b, n);
-        ArrayList<Integer> indexes = new ArrayList<>();
-        ListIterator<Token> enumerateEqn = this.getRPN().listIterator();
-        while (enumerateEqn.hasNext())
-        {
-            if (enumerateEqn.next().getTxt().equals(Token.Variable))
-            {
-                indexes.add(enumerateEqn.previousIndex());
-            }
-        }
+        ArrayList<Double> x = randomUniform(leftBound, rightBound, n);
+        ArrayList<Integer> indexes = findAllVariableIndex();
 
         ArrayList<Double> y = new ArrayList<>();
         ListIterator<Double> enumerateX = x.listIterator();
@@ -34,7 +26,7 @@ public class Integrate extends EquationParser{
             {
                 this.getRPN().get(index).setValue(enumerateX.next());
             }
-            y.add(this.evaluate() * (b - a));
+            y.add(this.evaluate() * (rightBound - leftBound));
         }
 
         return averageArray(y);

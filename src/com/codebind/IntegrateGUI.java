@@ -32,7 +32,7 @@ public class IntegrateGUI {
             rightBoundInput.setText("");
 
             Integrate integral = new Integrate(equation, left, right);
-            Double v = integral.monteCarloIntegrate(10000, left, right);
+            Double v = integral.monteCarloIntegrate(10000);
             labelOutput.setText("Value: " + v);
         });
     }
@@ -40,7 +40,6 @@ public class IntegrateGUI {
     public static void main(String[] args)
     {
         IntegrateGUI ig = new IntegrateGUI();
-
 
         JFrame frame = new JFrame("Integrate");
         frame.setContentPane(ig.mainPanel);
