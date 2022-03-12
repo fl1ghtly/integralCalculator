@@ -2,13 +2,22 @@ package com.codebind;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class Integrate {
-    public static double monteCarloIntegrate(EquationParser ps, Integer n, Double a, Double b)
+public class Integrate extends EquationParser{
+    private double leftBound;
+    private double rightBound;
+
+    public Integrate(String equation, double a, double b)
+    {
+        super(equation);
+        this.leftBound = a;
+        this.rightBound = b;
+    }
+
+    public double monteCarloIntegrate(Integer n, Double a, Double b)
     {
         ArrayList<Double> x = randomUniform(a, b, n);
         ArrayList<Integer> indexes = new ArrayList<>();
-        ArrayList<Token> eqn = ps.getRPN();
-        ListIterator<Token> enumerateEqn = eqn.listIterator();
+        ListIterator<Token> enumerateEqn = this.getRPN().listIterator();
         while (enumerateEqn.hasNext())
         {
             if (enumerateEqn.next().getTxt().equals(Token.Variable))
@@ -23,9 +32,9 @@ public class Integrate {
         {
             for (Integer index : indexes)
             {
-                eqn.get(index).setValue(enumerateX.next());
+                this.getRPN().get(index).setValue(enumerateX.next());
             }
-            y.add(ps.evaluate() * (b - a));
+            y.add(this.evaluate() * (b - a));
         }
 
         return averageArray(y);
@@ -49,7 +58,24 @@ public class Integrate {
         }
         return randArr;
     }
-/*
+
+    public double getLeftBound() {
+        return leftBound;
+    }
+
+    public double getRightBound() {
+        return rightBound;
+    }
+
+    public void setLeftBound(double leftBound) {
+        this.leftBound = leftBound;
+    }
+
+    public void setRightBound(double rightBound) {
+        this.rightBound = rightBound;
+    }
+
+    /*
     public static void main(String[] args) {
         String equation = "3x-5";
         Double left = 0.0;

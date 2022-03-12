@@ -31,8 +31,8 @@ public class IntegrateGUI {
             Double right = replaceBoundsOfIntegration(rightBound);
             rightBoundInput.setText("");
 
-            EquationParser parser = new EquationParser(equation);
-            Double v = Integrate.monteCarloIntegrate(parser, 10000, left, right);
+            Integrate integral = new Integrate(equation, left, right);
+            Double v = integral.monteCarloIntegrate(10000, left, right);
             labelOutput.setText("Value: " + v);
         });
     }
