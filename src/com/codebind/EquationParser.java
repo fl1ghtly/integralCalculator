@@ -221,12 +221,16 @@ public class EquationParser
                 break;
             case "-":
                 v = x - y;
+                break;
             case "/":
                 v = x / y;
+                break;
             case "*":
                 v = x * y;
+                break;
             case "^":
                 v = Math.pow(x, y);
+                break;
         }
         return v;
     }
@@ -238,6 +242,9 @@ public class EquationParser
         {
             case "-":
                 v = -x;
+                break;
+            case "!":
+                break;
         };
         return v;
     }
