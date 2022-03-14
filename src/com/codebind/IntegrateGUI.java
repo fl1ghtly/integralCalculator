@@ -19,21 +19,40 @@ public class IntegrateGUI {
 
     public IntegrateGUI()
     {
-        calculateButton.addActionListener(e -> {
+        calculateButton.addActionListener(f -> {
             String equation = equationInput.getText();
-            equationInput.setText("");
-
             String leftBound = leftBoundInput.getText();
-            Double left = replaceBoundsOfIntegration(leftBound);
-            leftBoundInput.setText("");
-
             String rightBound = rightBoundInput.getText();
-            Double right = replaceBoundsOfIntegration(rightBound);
-            rightBoundInput.setText("");
 
-            Integrate integral = new Integrate(equation, left, right);
-            Double v = integral.monteCarloIntegrate(10000);
-            labelOutput.setText("Value: " + v);
+            if (leftBound.equals("") || rightBound.equals("") || equation.equals(""))
+            {
+                labelOutput.setText("Error: Missing Input");
+                return;
+            }
+
+            Double left = replaceBoundsOfIntegration(leftBound);
+            Double right = replaceBoundsOfIntegration(rightBound);
+
+            if (left == null || right == null)
+            {
+                labelOutput.setText("Error: Invalid Bounds");
+                return;
+            }
+
+            try
+            {
+                Integrate integral = new Integrate(equation, left, right);
+                Double v = integral.monteCarloIntegrate(10000);
+                labelOutput.setText("Value: " + v);
+            }
+            catch (Exception e)
+            {
+                labelOutput.setText("Error: Invalid Input");
+            }
+
+            equationInput.setText("");
+            leftBoundInput.setText("");
+            rightBoundInput.setText("");
         });
     }
 
@@ -51,8 +70,15 @@ public class IntegrateGUI {
 
     private Double replaceBoundsOfIntegration(String val)
     {
-        // TODO add check to make sure it is a real number not a function
         EquationParser parser = new EquationParser(val);
-        return parser.evaluate();
+        try
+        {
+            double num = parser.evaluate();
+            return num;
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
     }
 }
