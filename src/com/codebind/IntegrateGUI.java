@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class IntegrateGUI {
     private JPanel mainPanel;
@@ -16,6 +17,8 @@ public class IntegrateGUI {
     private JLabel labelLeftBound;
     private JLabel labelRightBound;
     private JLabel labelOutput;
+
+    private List<JTextField> inputs = List.of(leftBoundInput, rightBoundInput, equationInput);
 
     public IntegrateGUI()
     {
@@ -50,9 +53,7 @@ public class IntegrateGUI {
                 labelOutput.setText("Error: Invalid Input");
             }
 
-            equationInput.setText("");
-            leftBoundInput.setText("");
-            rightBoundInput.setText("");
+            emptyInput();
         });
     }
 
@@ -79,6 +80,14 @@ public class IntegrateGUI {
         catch (Exception e)
         {
             return null;
+        }
+    }
+
+    private void emptyInput()
+    {
+        for (JTextField input : inputs)
+        {
+            input.setText("");
         }
     }
 }
