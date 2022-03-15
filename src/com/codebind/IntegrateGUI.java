@@ -45,8 +45,15 @@ public class IntegrateGUI {
             try
             {
                 Integrate integral = new Integrate(equation, left, right);
-                Double v = integral.monteCarloIntegrate(10000);
-                labelOutput.setText("Value: " + v);
+                if (integral.isContinuous())
+                {
+                    Double v = integral.monteCarloIntegrate(10000);
+                    labelOutput.setText("Value: " + v);
+                }
+                else
+                {
+                    labelOutput.setText("Error: Non-continuous function");
+                }
             }
             catch (Exception e)
             {

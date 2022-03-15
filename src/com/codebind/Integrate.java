@@ -32,7 +32,7 @@ public class Integrate extends EquationParser{
         return averageArray(y);
     }
 
-    public boolean isContinuousStrict()
+    public boolean isContinuous()
     {
         ArrayList<Double> linear = linearSubDivision(leftBound, rightBound, 10000);
         double dx = 0.00001;
