@@ -27,14 +27,16 @@ public class HelperFunctions {
         return false;
     }
 
-    public static int factorial(int n)
+    public static double factorial(double n)
     {
-        int a = 1;
-        for(int i =0; i <  n; i++)
-        {
-            a = a * (i +1);
-        }
-        return a;
+        return gamma(n + 1);
+    }
+
+    public static double gamma(double n)
+    {
+        double p1 = Math.sqrt(2 * Math.PI / n);
+        double p2 = (1 / Math.E) * (n + 1/(12 * n - (1/(10*n)) ) );
+        return p1 * Math.pow(p2, n);
     }
 }
 
