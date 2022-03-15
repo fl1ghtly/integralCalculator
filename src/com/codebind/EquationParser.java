@@ -157,9 +157,17 @@ public class EquationParser
                     }
                     output.add(op);
                 }
-                if (stack.peek().getType() == TokenType.FUNC)
+                try
                 {
-                    output.add(stack.pop());
+                    Token func = stack.peek();
+                    if (func != null && func.getType() == TokenType.FUNC)
+                    {
+                        output.add(stack.pop());
+                    }
+                }
+                catch (EmptyStackException e)
+                {
+
                 }
             }
             else if (t == TokenType.OP)
