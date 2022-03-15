@@ -22,41 +22,38 @@ public class IntegrateGUI {
 
     public IntegrateGUI()
     {
-        calculateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent f) {
-                String equation = equationInput.getText();
-                String leftBound = leftBoundInput.getText();
-                String rightBound = rightBoundInput.getText();
+        calculateButton.addActionListener(f -> {
+            String equation = equationInput.getText();
+            String leftBound = leftBoundInput.getText();
+            String rightBound = rightBoundInput.getText();
 
-                if (leftBound.equals("") || rightBound.equals("") || equation.equals(""))
-                {
-                    labelOutput.setText("Error: Missing Input");
-                    return;
-                }
-
-                Double left = replaceBoundsOfIntegration(leftBound);
-                Double right = replaceBoundsOfIntegration(rightBound);
-
-                if (left == null || right == null)
-                {
-                    labelOutput.setText("Error: Invalid Bounds");
-                    return;
-                }
-
-                try
-                {
-                    Integrate integral = new Integrate(equation, left, right);
-                    Double v = integral.monteCarloIntegrate(10000);
-                    labelOutput.setText("Value: " + v);
-                }
-                catch (Exception e)
-                {
-                    labelOutput.setText("Error: Invalid Input");
-                }
-
-                emptyInput();
+            if (leftBound.equals("") || rightBound.equals("") || equation.equals(""))
+            {
+                labelOutput.setText("Error: Missing Input");
+                return;
             }
+
+            Double left = replaceBoundsOfIntegration(leftBound);
+            Double right = replaceBoundsOfIntegration(rightBound);
+
+            if (left == null || right == null)
+            {
+                labelOutput.setText("Error: Invalid Bounds");
+                return;
+            }
+
+            try
+            {
+                Integrate integral = new Integrate(equation, left, right);
+                Double v = integral.monteCarloIntegrate(10000);
+                labelOutput.setText("Value: " + v);
+            }
+            catch (Exception e)
+            {
+                labelOutput.setText("Error: Invalid Input");
+            }
+
+            emptyInput();
         });
     }
 

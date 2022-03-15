@@ -34,7 +34,7 @@ public class Integrate extends EquationParser{
 
     public boolean isContinuousStrict()
     {
-        ArrayList<Double> linear = linearSubDivision(leftBound, rightBound, 100000);
+        ArrayList<Double> linear = linearSubDivision(leftBound, rightBound, 10000);
         double dx = 0.00001;
         ArrayList<Integer> indexes = findAllVariableIndex();
 
