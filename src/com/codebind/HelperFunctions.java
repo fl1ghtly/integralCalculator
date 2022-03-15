@@ -26,14 +26,15 @@ public class HelperFunctions {
         }
         return false;
     }
-}
 
-public static int factorial(int n) {
-  int a = 1;
-  for(int i =0; i <  n; i++)
+    public static int factorial(int n)
     {
-      a = a * (i +1);
+        int a = 1;
+        for(int i =0; i <  n; i++)
+        {
+            a = a * (i +1);
+        }
+        return a;
     }
-return a;
 }
 
