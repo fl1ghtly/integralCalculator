@@ -18,9 +18,11 @@ public class IntegrateGUI {
     private JLabel labelRightBound;
     private JLabel labelOutput;
 
+    private List<JTextField> inputs;
 
     public IntegrateGUI()
     {
+        inputs = List.of(leftBoundInput, rightBoundInput, equationInput);
         calculateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent f) {
@@ -54,9 +56,7 @@ public class IntegrateGUI {
                     labelOutput.setText("Error: Invalid Input");
                 }
 
-                leftBoundInput.setText("");
-                rightBoundInput.setText("");
-                equationInput.setText("");
+                emptyInput();
             }
         });
     }
@@ -84,6 +84,14 @@ public class IntegrateGUI {
         catch (Exception e)
         {
             return null;
+        }
+    }
+
+    private void emptyInput()
+    {
+        for (JTextField input : inputs)
+        {
+            input.setText("");
         }
     }
 }
