@@ -127,6 +127,17 @@ public class EquationParser
             {
                 output.add(tkn);
             }
+            else if (t == TokenType.UNARYOP)
+            {
+                if (tkn.getTxt().equals("-"))
+                {
+                    stack.add(tkn);
+                }
+                else
+                {
+                    output.add(tkn);
+                }
+            }
             else if (t == TokenType.FUNC)
             {
                 stack.add(tkn);
