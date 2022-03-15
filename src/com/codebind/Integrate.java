@@ -38,22 +38,17 @@ public class Integrate extends EquationParser{
         double dx = 0.00001;
         ArrayList<Integer> indexes = findAllVariableIndex();
 
-        double y1 = 0.0;
-        double y2 = 0.0;
+        double y1;
+        double y2;
 
-        ListIterator<Double> enumerateX = linear.listIterator();
-        while (enumerateX.hasNext())
-        {
-            double val = enumerateX.next();
-
+        for (double val : linear) {
             replaceVariables(indexes, val);
             y1 = this.evaluate();
 
             replaceVariables(indexes, val + dx);
             y2 = this.evaluate();
 
-            if (Math.abs(y2 - y1) > 0.001)
-            {
+            if (Math.abs(y2 - y1) > 0.001) {
                 return false;
             }
         }
