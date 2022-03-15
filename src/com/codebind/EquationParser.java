@@ -106,7 +106,7 @@ public class EquationParser
                 {
                     token.setType(TokenType.UNARYOP);
                 }
-                else if (HelperFunctions.in(tokens.get(i - 1).getTxt(), List.of("(", "*", "/" ,"-", "+")))
+                else if (HelperFunctions.in(tokens.get(i - 1).getType(), List.of(TokenType.LPAR, TokenType.OP, TokenType.RPAR, TokenType.NUM, TokenType.SYMBOL)))
                 {
                     token.setType(TokenType.UNARYOP);
                 }
@@ -255,6 +255,7 @@ public class EquationParser
                 v = -x;
                 break;
             case "!":
+                v = HelperFunctions.factorial(x);
                 break;
         };
         return v;
