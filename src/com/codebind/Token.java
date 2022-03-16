@@ -2,7 +2,9 @@ package com.codebind;
 import java.util.*;
 
 public class Token {
+    private int verbosity = 1;
     private Logger logger = new Logger(false);
+
     public static String Variable = "x";
     private String txt;
     private int precedence;
@@ -190,8 +192,33 @@ public class Token {
         return this.txt;
     }
 
+    public void setVerbosity(int verb)
+    {
+        verbosity = verb;
+    }
+
+    public void setLogger(boolean b)
+    {
+        logger.setShowLog(b);
+    }
+
     public String toString()
     {
-        return String.format("Text: %s\nType: %s\nPrecedence: %d\nAssociation: %d\nValue: %f\n", txt, type, precedence, assoc, value);
+        if (verbosity == 0)
+        {
+            return txt;
+        }
+        else if (verbosity == 1)
+        {
+            return String.format("Text: %s\n", txt);
+        }
+        else if (verbosity == 2)
+        {
+            return String.format("Text: %s\nType: %s\n", txt, type);
+        }
+        else
+        {
+            return String.format("Text: %s\nType: %s\nPrecedence: %d\nAssociation: %d\nValue: %f\n", txt, type, precedence, assoc, value);
+        }
     }
 }
