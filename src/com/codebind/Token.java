@@ -2,6 +2,7 @@ package com.codebind;
 import java.util.*;
 
 public class Token {
+    private Logger logger = new Logger(false);
     public static String Variable = "x";
     private String txt;
     private int precedence;
@@ -27,6 +28,8 @@ public class Token {
             {
                 this.setValue();
             }
+
+            logger.log(this.toString());
         }
     }
 
@@ -185,5 +188,10 @@ public class Token {
     public String getTxt()
     {
         return this.txt;
+    }
+
+    public String toString()
+    {
+        return String.format("Text: %s\nType: %s\nPrecedence: %d\nAssociation: %d\nValue: %f\n", txt, type, precedence, assoc, value);
     }
 }
