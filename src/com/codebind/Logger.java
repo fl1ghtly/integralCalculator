@@ -15,4 +15,8 @@ public class Logger {
             System.out.println(message);
         }
     }
+
+    public void setShowLog(boolean showLog) {
+        this.showLog = showLog;
+    }
 }
