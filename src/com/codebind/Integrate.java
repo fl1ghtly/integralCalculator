@@ -44,11 +44,16 @@ public class Integrate extends EquationParser{
         for (double val : linear) {
             replaceVariables(indexes, val);
             y1 = this.evaluate();
+            logger.log(String.format("y1: %f", y1));
 
             replaceVariables(indexes, val + dx);
             y2 = this.evaluate();
+            logger.log(String.format("y2: %f", y2));
 
-            if (Math.abs(y2 - y1) > 0.1) {
+            double dy = Math.abs(y2 - y1);
+            logger.log(String.format("dy: %f\n", dy));
+
+            if (dy > 0.1) {
                 return false;
             }
         }
@@ -61,6 +66,7 @@ public class Integrate extends EquationParser{
         {
             this.getRPN().get(index).setValue(value);
         }
+        logger.log(String.format("Replaced variables with value: %f", value));
     }
 
     private ArrayList<Integer> findAllVariableIndex()
@@ -74,7 +80,7 @@ public class Integrate extends EquationParser{
                 indexes.add(enumerateEqn.previousIndex());
             }
         }
-
+        logger.log(String.format("Integration Variable located at %s", indexes));
         return indexes;
     }
 
