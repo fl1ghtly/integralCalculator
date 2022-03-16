@@ -346,6 +346,6 @@ public class EquationParser
     public String toString()
     {
         prepareLogging(0, true);
-        return String.format("Equation: %s\nTokens: %s\nRPN: %s\n", eqn, tokens, rpn);
+        return String.format("\nEquation: %s\nTokens: %s\nRPN: %s\n", eqn, tokens, rpn);
     }
 }

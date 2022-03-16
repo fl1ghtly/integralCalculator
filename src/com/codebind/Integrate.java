@@ -5,6 +5,7 @@ import java.util.ListIterator;
 public class Integrate extends EquationParser{
     private double leftBound;
     private double rightBound;
+    private boolean doLogging = false;
 
     public Integrate(String equation, double a, double b)
     {
@@ -44,14 +45,14 @@ public class Integrate extends EquationParser{
         for (double val : linear) {
             replaceVariables(indexes, val);
             y1 = this.evaluate();
-            logger.log(String.format("y1: %f", y1));
+            logger.log(String.format("y1: %f", y1), doLogging);
 
             replaceVariables(indexes, val + dx);
             y2 = this.evaluate();
-            logger.log(String.format("y2: %f", y2));
+            logger.log(String.format("y2: %f", y2), doLogging);
 
             double dy = Math.abs(y2 - y1);
-            logger.log(String.format("dy: %f\n", dy));
+            logger.log(String.format("dy: %f\n", dy), doLogging);
 
             if (dy > 0.1) {
                 return false;
@@ -66,7 +67,7 @@ public class Integrate extends EquationParser{
         {
             this.getRPN().get(index).setValue(value);
         }
-        logger.log(String.format("Replaced variables with value: %f", value));
+        logger.log(String.format("Replaced variables with value: %f", value), doLogging);
     }
 
     private ArrayList<Integer> findAllVariableIndex()
@@ -80,7 +81,7 @@ public class Integrate extends EquationParser{
                 indexes.add(enumerateEqn.previousIndex());
             }
         }
-        logger.log(String.format("Integration Variable located at %s", indexes));
+        logger.log(String.format("Integration Variable located at indexes: %s", indexes));
         return indexes;
     }
 

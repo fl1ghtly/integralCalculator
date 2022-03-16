@@ -80,7 +80,7 @@ public class IntegrateGUI {
 
     private Double replaceBoundsOfIntegration(String val)
     {
-        logger.log("Converting Integration Bounds");
+        logger.log(String.format("Converting Integration Bounds for %s", val));
         EquationParser parser = new EquationParser(val);
         try
         {
