@@ -45,6 +45,7 @@ public class IntegrateGUI {
             try
             {
                 Integrate integral = new Integrate(equation, left, right);
+                integral.logger.log(integral.toString());
                 if (integral.isContinuous())
                 {
                     Double v = integral.monteCarloIntegrate(10000);
@@ -58,6 +59,7 @@ public class IntegrateGUI {
             catch (Exception e)
             {
                 labelOutput.setText("Error: Invalid Input");
+                e.printStackTrace();
             }
 
             emptyInput();

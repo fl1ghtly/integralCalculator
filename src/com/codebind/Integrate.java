@@ -48,7 +48,7 @@ public class Integrate extends EquationParser{
             replaceVariables(indexes, val + dx);
             y2 = this.evaluate();
 
-            if (Math.abs(y2 - y1) > 0.001) {
+            if (Math.abs(y2 - y1) > 0.1) {
                 return false;
             }
         }
@@ -124,5 +124,10 @@ public class Integrate extends EquationParser{
 
     public void setRightBound(double rightBound) {
         this.rightBound = rightBound;
+    }
+
+    public String toString()
+    {
+        return super.toString() + String.format("Left Bound: %f\nRight Bound: %f\n", leftBound, rightBound);
     }
 }

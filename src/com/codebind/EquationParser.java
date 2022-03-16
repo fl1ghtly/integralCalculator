@@ -5,7 +5,7 @@ import java.lang.reflect.*;
 
 public class EquationParser
 {
-    private Logger logger = new Logger(false);
+    public Logger logger = new Logger(true);
     private ArrayList<Token> tokens;
     private ArrayList<Token> rpn;
     private String eqn;
@@ -17,8 +17,6 @@ public class EquationParser
         this.tokens = changeUnaryOp();
         this.tokens = addImplicitMultiplication();
         this.rpn = convertEquation();
-
-        logger.log(this.toString());
     }
 
     public ArrayList<Token> tokenize()
