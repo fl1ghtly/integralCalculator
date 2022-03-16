@@ -19,6 +19,7 @@ public class IntegrateGUI {
     private JLabel labelOutput;
 
     private List<JTextField> inputs = List.of(leftBoundInput, rightBoundInput, equationInput);
+    private Logger logger = new Logger(true);
 
     public IntegrateGUI()
     {
@@ -32,7 +33,6 @@ public class IntegrateGUI {
                 labelOutput.setText("Error: Missing Input");
                 return;
             }
-
             Double left = replaceBoundsOfIntegration(leftBound);
             Double right = replaceBoundsOfIntegration(rightBound);
 
@@ -80,6 +80,7 @@ public class IntegrateGUI {
 
     private Double replaceBoundsOfIntegration(String val)
     {
+        logger.log("Converting Integration Bounds");
         EquationParser parser = new EquationParser(val);
         try
         {
@@ -94,6 +95,7 @@ public class IntegrateGUI {
 
     private void emptyInput()
     {
+        logger.log("Resetting Inputs");
         for (JTextField input : inputs)
         {
             input.setText("");
