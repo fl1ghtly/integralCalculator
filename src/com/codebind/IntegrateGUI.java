@@ -95,7 +95,7 @@ public class IntegrateGUI {
 
     private void emptyInput()
     {
-        logger.log("Resetting Inputs");
+        logger.log("Resetting Inputs\n");
         for (JTextField input : inputs)
         {
             input.setText("");

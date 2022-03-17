@@ -5,7 +5,7 @@ import java.lang.reflect.*;
 
 public class EquationParser
 {
-    public Logger logger = new Logger(true);
+    protected Logger logger = new Logger(true);
     private ArrayList<Token> tokens;
     private ArrayList<Token> rpn;
     private String eqn;
