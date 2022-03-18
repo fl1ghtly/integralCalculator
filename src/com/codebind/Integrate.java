@@ -51,10 +51,10 @@ public class Integrate extends EquationParser{
             y2 = this.evaluate();
             logger.log(String.format("y2: %f", y2), doLogging);
 
-            double dy = Math.abs(y2 - y1);
+            double dy = Math.abs(y1/y2);
             logger.log(String.format("dy: %f\n", dy), doLogging);
 
-            if (dy > 0.1) {
+            if (dy > 1.2) {
                 return false;
             }
         }
@@ -81,7 +81,7 @@ public class Integrate extends EquationParser{
                 indexes.add(enumerateEqn.previousIndex());
             }
         }
-        logger.log(String.format("Integration Variable located at indexes: %s", indexes));
+        logger.log(String.format("Integration Variable located at %s", indexes));
         return indexes;
     }
 
