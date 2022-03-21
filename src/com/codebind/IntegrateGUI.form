@@ -8,8 +8,9 @@
     <properties>
       <background color="-15457987"/>
     </properties>
-    <border type="none">
+    <border type="empty">
       <title-color color="-4473925"/>
+      <size top="0" left="20" bottom="20" right="20"/>
     </border>
     <children>
       <component id="62793" class="javax.swing.JLabel" binding="labelLeftBound">
@@ -45,7 +46,7 @@
       <component id="13798" class="javax.swing.JTextField" binding="leftBoundInput">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="291" height="30"/>
+            <preferred-size width="291" height="118"/>
           </grid>
         </constraints>
         <properties>
@@ -59,7 +60,7 @@
       <component id="9d408" class="javax.swing.JTextField" binding="rightBoundInput">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
+            <preferred-size width="150" height="118"/>
           </grid>
         </constraints>
         <properties>
