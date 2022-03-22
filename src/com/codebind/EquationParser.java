@@ -219,7 +219,16 @@ public class EquationParser
             methodMap.put(method.getName(), method);
         }
 
-        Method m = methodMap.get(func);
+        Method m;
+        if (func.equals("ln"))
+        {
+            m = methodMap.get("log");
+        }
+        else
+        {
+            m = methodMap.get(func);
+        }
+
         try
         {
             v = (Double) m.invoke(null, val);
