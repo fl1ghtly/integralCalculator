@@ -48,7 +48,8 @@ public class IntegrateGUI {
                 if (integral.isContinuous())
                 {
                     Double v = integral.monteCarloIntegrate(10000);
-                    labelOutput.setText("Value: " + v);
+                    double error = integral.monteCarloError();
+                    labelOutput.setText("Value: " + v + "±" + error);
                 }
                 else
                 {

@@ -6,6 +6,7 @@ public class Integrate extends EquationParser{
     private double leftBound;
     private double rightBound;
     private boolean doLogging = false;
+    private ArrayList<Double> values;
 
     public Integrate(String equation, double a, double b)
     {
@@ -30,6 +31,7 @@ public class Integrate extends EquationParser{
             y.add(this.evaluate() * (rightBound - leftBound));
         }
 
+        this.values = y;
         return averageArray(y);
     }
 
@@ -59,6 +61,24 @@ public class Integrate extends EquationParser{
             }
         }
         return true;
+    }
+
+    public static double standardDeviation(ArrayList<Double> x)
+    {
+        double sum = 0.0;
+        double avg = averageArray(x);
+
+        for (double n : x)
+        {
+            sum += Math.pow(n - avg, 2);
+        }
+
+        return Math.sqrt(sum/x.size());
+    }
+
+    public double monteCarloError()
+    {
+        return standardDeviation(this.values) / Math.sqrt(this.values.size());
     }
 
     private void replaceVariables(ArrayList<Integer> indexes, double value)
