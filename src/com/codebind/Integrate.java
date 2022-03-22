@@ -61,6 +61,19 @@ public class Integrate extends EquationParser{
         return true;
     }
 
+    public static double standardDeviation(ArrayList<Double> x, int size)
+    {
+        double sum = 0.0;
+        double avg = averageArray(x);
+
+        for (double n : x)
+        {
+            sum += Math.pow(n - avg, 2);
+        }
+
+        return Math.sqrt(sum/size);
+    }
+
     private void replaceVariables(ArrayList<Integer> indexes, double value)
     {
         for (Integer index : indexes)
