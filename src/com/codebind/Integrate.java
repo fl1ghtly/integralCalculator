@@ -7,10 +7,15 @@ public class Integrate extends EquationParser{
     private double rightBound;
     private boolean doLogging = false;
     private ArrayList<Double> values;
+    private boolean constant = false;
 
     public Integrate(String equation, double a, double b)
     {
         super(equation);
+        if (findAllVariableIndex().equals(new ArrayList<>()))
+        {
+            constant = true;
+        }
         this.leftBound = a;
         this.rightBound = b;
     }
@@ -156,5 +161,10 @@ public class Integrate extends EquationParser{
     public String toString()
     {
         return super.toString() + String.format("Left Bound: %f\nRight Bound: %f\n", leftBound, rightBound);
+    }
+
+    public boolean isConstant()
+    {
+        return constant;
     }
 }

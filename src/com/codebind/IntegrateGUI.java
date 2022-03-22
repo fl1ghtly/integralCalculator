@@ -45,9 +45,15 @@ public class IntegrateGUI {
             {
                 Integrate integral = new Integrate(equation, left, right);
                 integral.logger.log(integral.toString());
-                if (integral.isContinuous())
+
+                if (integral.isConstant())
                 {
-                    Double v = integral.monteCarloIntegrate(100000);
+                    double v = integral.getRPN().get(0).getValue() * (right - left);
+                    labelOutput.setText("Value: " + v);
+                }
+                else if (integral.isContinuous())
+                {
+                    Double v = integral.monteCarloIntegrate(10000);
                     double error = integral.monteCarloError();
                     labelOutput.setText("Value: " + v + " ± " + error);
                 }
