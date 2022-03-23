@@ -19,6 +19,9 @@ public class EquationParser
         this.rpn = convertEquation();
     }
 
+    /**
+     * @return a list of tokens of the equation string
+     */
     public ArrayList<Token> tokenize()
     {
         String tkn = "";
@@ -58,6 +61,10 @@ public class EquationParser
         return tkns;
     }
 
+    /**
+     * @return the list of tokens so that implicit multiplication is added
+     * @see <a href="https://www.lidavidm.me/blog/posts/2013-09-15-implicit-parsing-in-sympy.html#:~:text=Implicit%20multiplication%20scans%20the%20tokens%20two%20at%20a%20time%2C%20looking%20for%20one%20of%20these%20conditions%3A">Implicit Multiplication Parsing</a>
+     */
     public ArrayList<Token> addImplicitMultiplication()
     {
         ArrayList<Token> changed = new ArrayList<>();
@@ -93,6 +100,9 @@ public class EquationParser
         return changed;
     }
 
+    /**
+     * @return the list of tokens changed so that unary operators are added
+     */
     public ArrayList<Token> changeUnaryOp()
     {
         ArrayList<Token> changed = new ArrayList<>();
@@ -116,6 +126,11 @@ public class EquationParser
         }
         return changed;
     }
+
+    /**
+     * @return a list of all tokens in the equation
+     * @see <a href="https://www.chris-j.co.uk/parsing.php">Algorithm</a>
+     */
     public ArrayList<Token> convertEquation()
     {
         Stack<Token> stack = new Stack<>();
@@ -209,6 +224,11 @@ public class EquationParser
     }
 
 
+    /**
+     * @param func the function to be evaluated
+     * @param val the value to be evaluated in the function
+     * @return the evaluation of the function at the value
+     */
     private static double evalFunc(String func, Double val)
     {
         Double v = null;
@@ -279,6 +299,9 @@ public class EquationParser
         return v;
     }
 
+    /**
+     * @return value of the evaluated equation
+     */
     public Double evaluate()
     {
         Stack<Token> stack = new Stack<>();

@@ -20,6 +20,11 @@ public class Integrate extends EquationParser{
         this.rightBound = b;
     }
 
+    /**
+     * @param n number of points to sample the function
+     * @return the average value of all sampled points of the function
+     * @see <a href="https://en.wikipedia.org/wiki/Monte_Carlo_integration">Monte Carlo Integration</a>
+     */
     public double monteCarloIntegrate(Integer n)
     {
         ArrayList<Double> x = randomUniform(leftBound, rightBound, n);
@@ -40,6 +45,9 @@ public class Integrate extends EquationParser{
         return averageArray(y);
     }
 
+    /**
+     * @return whether the equation is continuous in the open interval
+     */
     public boolean isContinuous()
     {
         ArrayList<Double> linear = linearSubDivision(leftBound, rightBound, 10000);
@@ -58,6 +66,8 @@ public class Integrate extends EquationParser{
             y2 = this.evaluate();
             logger.log(String.format("y2: %f", y2), doLogging);
 
+            // Continuity can be determined if for a small dx,
+            // the ratio between y1 and y2 is greater than some constant
             double dy = Math.abs(y1/y2);
             logger.log(String.format("dy: %f\n", dy), doLogging);
 
@@ -81,11 +91,19 @@ public class Integrate extends EquationParser{
         return Math.sqrt(sum/x.size());
     }
 
+    /**
+     * @return the approximate error in the integration
+     * @see <a href="https://web.northeastern.edu/afeiguin/phys5870/phys5870/node71.html">Error Derivation</a>
+     */
     public double monteCarloError()
     {
         return standardDeviation(this.values) / Math.sqrt(this.values.size());
     }
 
+    /**
+     * @param indexes the location of all variables in the array
+     * @param value the value to replace the variable with
+     */
     private void replaceVariables(ArrayList<Integer> indexes, double value)
     {
         for (Integer index : indexes)
@@ -95,6 +113,9 @@ public class Integrate extends EquationParser{
         logger.log(String.format("Replaced variables with value: %f", value), doLogging);
     }
 
+    /**
+     * @return a list of all indexes where the variable is located
+     */
     private ArrayList<Integer> findAllVariableIndex()
     {
         ArrayList<Integer> indexes = new ArrayList<>();
@@ -110,6 +131,12 @@ public class Integrate extends EquationParser{
         return indexes;
     }
 
+    /**
+     * @param start initial value
+     * @param end final value
+     * @param subDivisions number of time the array should be divided
+     * @return a list of values from start (inclusive) to end (exclusive)
+     */
     public static ArrayList<Double> linearSubDivision(double start, double end, int subDivisions)
     {
         ArrayList<Double> lin = new ArrayList<>();
