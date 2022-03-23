@@ -11,11 +11,13 @@ public class IntegrateGUI {
     private JTextField leftBoundInput;
     private JTextField rightBoundInput;
     private JButton calculateButton;
-    private JLabel labelEquation;
+    private JLabel labelTitle;
     private JLabel labelLeftBound;
     private JLabel labelRightBound;
     private JLabel labelOutput;
     private JButton restartButton;
+    private JLabel labelCredit;
+    private JLabel labelEquation;
 
     private List<JTextField> inputs = List.of(leftBoundInput, rightBoundInput, equationInput);
     private Logger logger = new Logger(true);
@@ -53,7 +55,7 @@ public class IntegrateGUI {
                 }
                 else if (integral.isContinuous())
                 {
-                    Double v = integral.monteCarloIntegrate(10000);
+                    Double v = integral.monteCarloIntegrate(100000);
                     double error = integral.monteCarloError();
                     labelOutput.setText("Value: " + v + " ± " + error);
                 }

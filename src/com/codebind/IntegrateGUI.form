@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.codebind.IntegrateGUI">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="349" y="20" width="936" height="641"/>
+      <xy x="349" y="20" width="950" height="641"/>
     </constraints>
     <properties>
       <background color="-15457987"/>
@@ -15,7 +15,7 @@
     <children>
       <component id="62793" class="javax.swing.JLabel" binding="labelLeftBound">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="125" height="17"/>
           </grid>
         </constraints>
@@ -30,7 +30,7 @@
       </component>
       <component id="67a49" class="javax.swing.JLabel" binding="labelRightBound">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="3" height="3"/>
           </grid>
         </constraints>
@@ -45,7 +45,7 @@
       </component>
       <component id="13798" class="javax.swing.JTextField" binding="leftBoundInput">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="291" height="118"/>
           </grid>
         </constraints>
@@ -59,7 +59,7 @@
       </component>
       <component id="9d408" class="javax.swing.JTextField" binding="rightBoundInput">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="118"/>
           </grid>
         </constraints>
@@ -73,7 +73,7 @@
       </component>
       <component id="c7e15" class="javax.swing.JButton" binding="calculateButton">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-13148614"/>
@@ -85,7 +85,7 @@
       </component>
       <component id="64454" class="javax.swing.JButton" binding="restartButton" default-binding="true">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-7200993"/>
@@ -98,7 +98,7 @@
       </component>
       <component id="26deb" class="javax.swing.JTextField" binding="equationInput">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="8" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -110,7 +110,7 @@
           <toolTipText value="Enter the Equation"/>
         </properties>
       </component>
-      <component id="15fa5" class="javax.swing.JLabel" binding="labelEquation">
+      <component id="15fa5" class="javax.swing.JLabel" binding="labelTitle">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -119,18 +119,41 @@
           <enabled value="true"/>
           <font name="JetBrains Mono ExtraBold" size="48" style="1"/>
           <foreground color="-220399"/>
-          <labelFor value="26deb"/>
-          <text value="Input Equation"/>
+          <labelFor value=""/>
+          <text value="Integral Calculator"/>
         </properties>
       </component>
       <component id="fe677" class="javax.swing.JLabel" binding="labelOutput">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="JetBrains Mono Thin" size="24" style="0"/>
           <foreground color="-220399"/>
           <text value="Value: "/>
+        </properties>
+      </component>
+      <component id="8d7c6" class="javax.swing.JLabel" binding="labelCredit">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono Light" size="18" style="0"/>
+          <foreground color="-220399"/>
+          <horizontalAlignment value="0"/>
+          <horizontalTextPosition value="0"/>
+          <text value="James Nguyen '22 Rishi Sheth '22"/>
+        </properties>
+      </component>
+      <component id="e67b4" class="javax.swing.JLabel" binding="labelEquation">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font name="JetBrains Mono ExtraBold" size="26" style="1"/>
+          <foreground color="-220399"/>
+          <labelFor value="26deb"/>
+          <text value="Input Equation"/>
         </properties>
       </component>
     </children>
