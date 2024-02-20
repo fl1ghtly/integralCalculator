@@ -7,3 +7,7 @@ Created as part of the PHHS CSA Course Project.
 * Equation Parsing
 * Function Continuity Checks
 * Error in Approximation
+
+## Created by
+Rishi Sheth - https://github.com/RSqwining/
+James Nguyen - https://github.com/fl1ghtly
