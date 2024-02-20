@@ -9,5 +9,6 @@ Created as part of the PHHS CSA Course Project.
 * Error in Approximation
 
 ## Created by
-Rishi Sheth - https://github.com/RSqwining/
+Rishi Sheth - https://github.com/RSqwining
+
 James Nguyen - https://github.com/fl1ghtly
